@@ -29,7 +29,10 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
         selectedIndex: _currentIndex,
         onDestinationSelected: (idx) => setState(() => _currentIndex = idx),
         destinations: const [
-          NavigationDestination(icon: Icon(Icons.bookmark), label: 'Mis Ramos'),
+          NavigationDestination(
+            icon: Icon(Icons.bookmark),
+            label: 'Asignaturas',
+          ),
           NavigationDestination(
             icon: Icon(Icons.calendar_month),
             label: 'Horario',
