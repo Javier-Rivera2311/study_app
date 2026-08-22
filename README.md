@@ -84,7 +84,7 @@ Este documento sirve como mapa arquitectónico y de contexto del proyecto. Está
 
 ---
 
-## 4. 📂 Estructura de Archivos (Directorios)
+## 4. 📂 Estructura de Archivos (Directorios) 
 
 * `lib/main.dart`: Punto de entrada, rutas y configuración de Material 3.
 * **`/models/`**
