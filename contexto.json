@@ -1,0 +1,116 @@
+{
+  "project_context": {
+    "general_information": {
+      "project_name": "University Academic Hub / Gestor Académico Universitario",
+      "framework": "Flutter (Dart) con Material 3",
+      "platforms": ["Android", "iOS"],
+      "persistence": "Almacenamiento Local Offline-First usando SharedPreferences y JSON",
+      "initial_database_state": "100% limpia (sin datos mock ni valores predeterminados)",
+      "objective": "Gestión integral de ramos cursados, horario semanal con vistas flexibles, plan de estudio con temporizador Pomodoro háptico/sonoro y simulador predictivo de notas."
+    },
+    "data_architecture_and_models": {
+      "Subject": {
+        "entity_name": "Asignatura",
+        "persistence_key": "user_subjects_key",
+        "attributes": {
+          "id": "String - Identificador único",
+          "code": "String - Código de la asignatura (ej. ICI222)",
+          "name": "String - Nombre del ramo",
+          "credits": "int - Créditos SCT",
+          "colorValue": "int - Color en formato hexadecimal para tarjetas y chips",
+          "gradeItems": "List<GradeItem> - Lista de evaluaciones asociadas"
+        }
+      },
+      "ClassSchedule": {
+        "entity_name": "Bloque de Horario",
+        "persistence_key": "user_schedules_key",
+        "attributes": {
+          "id": "String - Identificador único",
+          "subjectId": "String - Referencia a la asignatura padre",
+          "subjectName": "String - Nombre de la asignatura",
+          "day": "String - Día de la semana (Lunes a Sábado)",
+          "startTime": "String - Hora de inicio (ej. 10:15)",
+          "endTime": "String - Hora de término (ej. 11:45)",
+          "room": "String - Sala o laboratorio",
+          "colorValue": "int - Color heredado de la asignatura"
+        }
+      },
+      "StudyTask": {
+        "entity_name": "Bloque de Plan de Estudio",
+        "persistence_key": "user_tasks_key",
+        "attributes": {
+          "id": "String - Identificador único",
+          "day": "String - Día asignado",
+          "subjectName": "String - Materia o ramo a estudiar",
+          "timeSlot": "String - Rango horario (ej. 07:15 - 08:45)",
+          "plannedHours": "double - Horas estimadas",
+          "isCompleted": "bool - Estado del checkbox de cumplimiento"
+        }
+      },
+      "GradeItem": {
+        "entity_name": "Evaluación / Certamen",
+        "attributes": {
+          "id": "String - Identificador único",
+          "name": "String - Nombre de la evaluación (ej. Certamen 1, Taller)",
+          "weightPercentage": "double - Ponderación en porcentaje (ej. 30.0)",
+          "score": "double? - Nota obtenida (escala 1.0 a 7.0) o null si está pendiente"
+        }
+      }
+    },
+    "ui_modules_and_features": {
+      "SubjectsScreen": {
+        "module_name": "Mis Ramos",
+        "features": [
+          "Listado de todas las asignaturas activas registradas por el usuario",
+          "Formulario de creación con selector de color temático y créditos SCT",
+          "Eliminación de ramos"
+        ]
+      },
+      "ScheduleScreen": {
+        "module_name": "Horario",
+        "features": [
+          "Selector de vista dual (Vista Diaria con chips vs Toda la Semana en acordeón expandible)",
+          "Creación rápida con repetición multidia mediante FilterChips para duplicar la misma clase con un solo clic"
+        ]
+      },
+      "StudyTrackerScreen": {
+        "module_name": "Estudio",
+        "features": [
+          "Temporizador Pomodoro Integrado (Enfoque 25min, Descanso Corto 5min, Descanso Largo 15min)",
+          "Selector desplegable responsivo para vincular el Pomodoro a una tarea específica",
+          "Alarma y feedback de finalización con SystemSound.alert y HapticFeedback.heavyImpact",
+          "Marcado rápido de tarea completada desde el panel del temporizador",
+          "Checklist semanal agrupado por día con cálculo de horas cumplidas vs planificadas"
+        ]
+      },
+      "GradeSimulatorScreen": {
+        "module_name": "Simulador",
+        "features": [
+          "Selector de asignatura para evaluar",
+          "Formulario dinámico de evaluaciones y ponderaciones",
+          "Tarjeta responsiva de proyección automática (Promedio actual ponderado, porcentaje total evaluado y restante)",
+          "Fórmula predictiva: Nota Necesaria = (4.0 - Puntos Ganados) / (Ponderación Restante / 100)",
+          "Mensajes de alerta según estado: Aprobado garantizado, Reprobado matemático, o meta proyectada",
+          "Botón de acción flotante centrado en la parte inferior (centerFloat)"
+        ]
+      }
+    },
+    "file_structure": {
+      "lib/main.dart": "Punto de entrada con MaterialApp y configuración del tema Material 3",
+      "lib/models/subject.dart": "Modelo y serialización de asignaturas",
+      "lib/models/class_schedule.dart": "Modelo y serialización de clases",
+      "lib/models/study_task.dart": "Modelo y serialización de tareas de estudio",
+      "lib/models/grade_item.dart": "Modelo y serialización de calificaciones",
+      "lib/services/storage_service.dart": "Métodos async para persistencia local en SharedPreferences",
+      "lib/widgets/task_tile.dart": "Tarjeta interactiva para la lista de tareas",
+      "lib/widgets/schedule_card.dart": "Tarjeta para los bloques de horario",
+      "lib/widgets/grade_row.dart": "Fila editable para notas y ponderaciones",
+      "lib/widgets/pomodoro_timer_card.dart": "Widget encapsulado con la lógica y UI del temporizador",
+      "lib/screens/main_navigation_screen.dart": "Shell con NavigationBar e IndexedStack para las pantallas",
+      "lib/screens/subjects_screen.dart": "Pantalla de gestión de asignaturas",
+      "lib/screens/schedule_screen.dart": "Pantalla de horarios con vista diaria y semanal",
+      "lib/screens/study_tracker_screen.dart": "Pantalla de plan de estudio",
+      "lib/screens/grade_simulator_screen.dart": "Pantalla del simulador predictivo de notas"
+    }
+  }
+}
