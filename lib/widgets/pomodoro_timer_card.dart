@@ -114,7 +114,7 @@ class _PomodoroTimerCardState extends State<PomodoroTimerCard> {
             Expanded(child: Text(message)),
           ],
         ),
-        backgroundColor: Colors.teal.shade800,
+        backgroundColor: const Color.fromARGB(255, 1, 110, 98),
         duration: const Duration(seconds: 4),
       ),
     );
